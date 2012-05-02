@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
+Highscore.create(:name => 'Harry Potter', :score => 5)
+Highscore.create(:name => 'Luke Skywalker', :score => 9)

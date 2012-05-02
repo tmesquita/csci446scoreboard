@@ -1,4 +1,5 @@
 Scoreboard::Application.routes.draw do
+  resources :highscores
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

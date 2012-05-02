@@ -1,5 +1,6 @@
+var db = "http://localhost:3000/highscores";
 var guessesLeft = 10;
-var highScores = new Array([9, "HarryJamesPotter"], [3, "ZedCthulhu"], [2, "NearlyDied"]);
+//var highScores = new Array([9, "HarryJamesPotter"], [3, "ZedCthulhu"], [2, "NearlyDied"]);
 var winningNumber;
 
 $(function() {
@@ -39,12 +40,15 @@ function setWinningNumber(){
 	winningNumber = Math.floor(Math.random()*102)+1; 
 }
 
-function populateHighScores(scores) {
-  	$('div#highScores').empty();
-  	for (var i = 0; i < scores.length; ++i) {
-    	$('div#highScores').append("<p>" + scores[i][0] + " " + scores[i][1] + "</p>");
-  	}
+function populateHighScores() {
+	$.get(db, function(scores) {
+  		$('div#highScores').empty();
+  		for (var i = 0; i < scores.length; ++i) {
+    		$('div#highScores').append("<p>" + scores[i].name + " " + scores[i].score + "</p>");
+  		}
+	});
 }
+
 
 function updateScore(score) {
   	document.getElementById("guessesLeft").innerHTML=score;
@@ -52,7 +56,8 @@ function updateScore(score) {
 
 function getName(){
 	var userName = prompt("Please enter your name", "Darth Vader");
-	highScores.push([guessesLeft, userName]);
+	//highScores.push([guessesLeft, userName]);
+	insertIntoDB(userName, guessesLeft);
 	reset();
 }
 
@@ -64,4 +69,8 @@ function reset() {
   	document.getElementById("hint").innerHTML="";
   	document.getElementById("guess").value="";
   	document.getElementById("winningNumber").innerHTML=winningNumber;
+}
+
+function insertIntoDB(userName, score){
+	$.post(db, { "name": userName, "score": score});
 }
