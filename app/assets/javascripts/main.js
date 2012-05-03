@@ -1,4 +1,4 @@
-var db = "http://localhost:3000/highscores";
+var db = "http://simple-summer-5284.herokuapp.com/highscores";
 var guessesLeft = 10;
 //var highScores = new Array([9, "HarryJamesPotter"], [3, "ZedCthulhu"], [2, "NearlyDied"]);
 var winningNumber;
